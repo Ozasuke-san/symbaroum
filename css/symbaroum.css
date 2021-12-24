@@ -2395,6 +2395,7 @@
 .symbaroum.sheet.item .artifact .power-n {
   display: flex;
   flex-direction: column;
+  height: -webkit-fit-content;
   height: fit-content;
   height: -moz-fit-content;
   width: 100%;
@@ -2411,6 +2412,8 @@
   flex-flow: row;
   flex-wrap: nowrap;
   flex-basis: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   margin: 5px;
   background: var(--title-color) repeat;
