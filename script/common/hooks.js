@@ -1,6 +1,7 @@
 import { SymbaroumActor } from './actor.js';
 import { SymbaroumItem, buildRolls, getEffect } from './item.js';
 import { PlayerSheet } from '../sheet/player.js';
+import { SymbaroumFactionStatusSheet } from '../sheet/factionstatus.js';
 import { TraitSheet } from '../sheet/trait.js';
 import { AbilitySheet } from '../sheet/ability.js';
 import { MysticalPowerSheet } from '../sheet/mystical-power.js';
@@ -23,9 +24,15 @@ import { SymbaroumWide } from '../sheet/journal.js';
 import { enrichTextEditors } from './enricher.js';
 import { tourSetup } from '../../tours/toursetup.js';
 
+// Import of models
+import { FactionStatusListModel } from '../models/factionstatusmodel.js';
+
+
 Hooks.once('init', () => {
 
   const debouncedReload = foundry.utils.debounce(() => window.location.reload(), 250);
+
+  CONFIG.Actor.systemDataModels["factionstatus"] = FactionStatusListModel;
 
   CONFIG.Actor.documentClass = SymbaroumActor;
   CONFIG.Item.documentClass = SymbaroumItem;
@@ -33,6 +40,7 @@ Hooks.once('init', () => {
   Actors.registerSheet('symbaroum', PlayerSheet, { types: ['player'], makeDefault: true });
   Actors.registerSheet('symbaroum', MonsterSheet, { types: ['monster'], makeDefault: true });
   Actors.registerSheet('symbaroum', PlayerSheet, { types: ['monster'], makeDefault: false });
+  Actors.registerSheet('symbaroum', SymbaroumFactionStatusSheet, { types: ['factionstatus'], makeDefault: true });
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('symbaroum', TraitSheet, { types: ['trait'], makeDefault: true });
   Items.registerSheet('symbaroum', AbilitySheet, { types: ['ability'], makeDefault: true });
@@ -392,6 +400,15 @@ Hooks.once('ready', () => {
       }); 
   }
 
+});
+
+Hooks.on('dropCanvasData', (source, data) => {
+   if(data.type === 'Actor') {
+    let actor = fromUuidSync(data.uuid);
+    if(actor.type === 'factionstatus') { 
+      return false;
+    }
+  }
 });
 
 Hooks.on("preDocumentSheetRegistrarInit", (settings) => {

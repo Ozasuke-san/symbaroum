@@ -2,7 +2,8 @@
   "Actor": {
     "types": [
       "player",
-      "monster"
+      "monster",
+      "factionstatus"
     ],
     "templates": {
       "attributes": {
@@ -65,7 +66,7 @@
             "threshold": 0
           },
           "corruption": {
-	        "max": 0,
+            "max": 0,
             "permanent": 0,
             "temporary": 0,
             "threshold": 0,
@@ -153,6 +154,20 @@
         "tactics": "",
         "manner": ""
       }
+    },
+    "factionstatus": {
+      "year": 22,
+      "month": "",
+      "factions": [ {
+        "name":"",
+        "generalStatus": "",
+        "leader":"",
+        "impressedBy":"",
+        "likes":"",
+        "dislikes":"",
+        "factionHistory": [          
+        ]
+      }]
     }
   },
   "Item": {
@@ -185,7 +200,7 @@
             "threshold": 0
           },
           "corruption": {
-	          "max": 0,
+            "max": 0,
             "threshold": 0
           },
           "experience": {

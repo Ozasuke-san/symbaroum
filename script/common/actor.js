@@ -5,6 +5,9 @@ import { baseRoll } from './roll.js';
 export class SymbaroumActor extends Actor {
 
     prepareData() {
+        if(this.type === 'factionstatus') {
+            return;
+        }
         // console.log("In prepareData");
         super.prepareData();
         // console.log("Init data");
